@@ -1,3 +1,3 @@
 # MyOwnCode
-My own code.
+It's my own code.
 Hello,world!
