@@ -1,57 +1,53 @@
-#include<iostream>
+#include <iostream>
+#include <algorithm>
 using namespace std;
-const int N = 100100;
-int element[N],nxt[N],index,head;
-void Add(int x)
-{
-    element[index]=x;
-    nxt[index]=head;
-    head = index;
-    index++;
-}
-void Delete(int k)
-{
-    
-}
-void Insert(int k, int x) 
-{
-}
-void Print()
-{
-    for(int i=head;i!=-1;i=nxt[i])
-    {
-        cout<<element[i]<<" ";
-    }
-    cout<<endl;
-}
-int main() 
-{
-    index = 0;
-    head = -1;
-    int m;
-    cin>>m;
-    for(int i=0;i<m;i++) 
-    {
-        char command;
-        int x,k;
-        cin>>command;
-        switch(command)
-        {
-            case 'H':cin>>x;Add(x);break;
-            case 'D':
-            cin>>k;
-            if(k==0)
-            {
-                head = nxt[head];
+#define maxn 100000
+int a[maxn];
+int cnt;
+int n;
+
+void Qsort(int A[], int Left, int Right) {
+    int Pivot, Low, High;
+    cnt++;
+    if (Left < Right) {
+        Pivot = A[Left];
+        Low = Left;
+        High = Right;
+
+        while (1) {
+            // 从左向右找第一个大于等于基准的元素
+            while (Low < High && A[Low] < Pivot) {
+                Low++;
             }
-            else 
-            {
-                Delete(k-1);
+            // 从右向左找第一个小于等于基准的元素
+            while (Low < High && A[High] > Pivot) {
+                High--;
             }
-            break;
-            case 'I':cin>>k>>x;Insert(k-1,x);break;
-            default:break;
+            if (Low >= High) break;
+            swap(A[Low], A[High]);
         }
+
+        // 放置基准值到正确位置
+        if (Low > High) {
+            swap(A[Left], A[High]);
+        } else {
+            swap(A[Left], A[Low]);
+        }
+
+        Qsort(A, Left, High - 1);
+        Qsort(A, High + 1, Right);
     }
-    Print();
+}
+
+int main() {
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    Qsort(a, 0, n - 1);
+    cout << cnt << endl;
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
 }

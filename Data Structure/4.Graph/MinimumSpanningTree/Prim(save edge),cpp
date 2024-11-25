@@ -1,0 +1,85 @@
+#include<iostream>
+using namespace std;
+#define maxn 10000
+#define INF 2000000
+int g[maxn][maxn];
+int n,m;
+bool st[maxn];
+int ans;
+struct edge
+{
+    int u;
+    int v;
+    int w;
+}dist[maxn];
+void prim()
+{
+    dist[0].w=0;
+    st[0]=1;
+    for(int i=1;i<n;i++)
+    {
+        if(dist[i].w>g[0][i])
+        {
+            dist[i].w = g[0][i];
+            dist[i].u=0;
+            dist[i].v=i;
+        }
+    }
+    
+    for(int i=1;i<n;i++)
+    {
+        int temp = INF;
+        int index = -1;
+        for(int j =1;j<n;j++)
+        {
+            if(!st[j]&&dist[j].w<temp)
+            {
+                temp = dist[j].w;
+                index = j;
+            }
+        }
+        st[index]=1;    
+        ans += dist[index].w;
+        
+        cout<<dist[index].u<<' '<<dist[index].v<<endl;
+
+        for(int j=1;j<n;j++)
+        {
+            if(dist[j].w>g[index][j])
+            {
+                dist[j].w = g[index][j];
+                dist[j].u = index;
+                dist[j].v = j;
+            }
+        }
+    }
+
+}
+int main()
+{
+    cin>>n>>m;
+    for(int i = 0;i<n;i++)
+    {
+        dist[i].w=INF;
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            g[i][j] = INF;
+            if(i==j)
+            {
+                g[i][j] = 0;
+            }
+        }
+    }
+    int u,v,w;
+    for(int i =0;i<m;i++)
+    {
+        cin>>u>>v>>w;
+        g[u][v]=w;
+        g[v][u]=w;
+    }
+    prim();
+    cout<<ans<<endl;
+}
