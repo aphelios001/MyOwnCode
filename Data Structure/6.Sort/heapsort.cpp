@@ -6,13 +6,13 @@ void heapify(int a[],int n,int i)
     int lson=i*2+1;
     int rson=i*2+2;
 
-    if(lson<n&&a[largest]<a[lson])
+    if(lson<n && a[largest]<a[lson])
     {
-        largest=lson;
+        largest = lson;
     }
-    if(rson<n&&a[largest]<a[rson])
+    if(rson<n && a[largest]<a[rson])
     {
-        largest=rson;
+        largest = rson;
     }
     if(largest!=i)
     {
