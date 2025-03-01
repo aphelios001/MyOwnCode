@@ -1,3 +1,3 @@
 # MyOwnCode
-It's my own code.
-Hello,world!
+
+数据结构代码的实践
