@@ -4,44 +4,44 @@
 using namespace std;
 struct Heap
 {
-	int* element;
+	int* Element;
 	int size;
 	int capacity;
 
-	Heap() :element(new int[MAX]), size(0), capacity(MAX) 
+	Heap() :Element(new int[MAX]), size(0), capacity(MAX) 
 	{
-		element[0] = INT_MIN;
+		Element[0] = INT_MIN;
 	}
 	
 	void MinHeapAllInsert(int a[],int n)
 	{
 		for (int i = 1; i <= n; i++)
 		{
-			element[++size] = a[i-1];
+			Element[++size] = a[i-1];
 		}
 		adjust();
 	}
 	void down(int i)
 	{
 		int parent, child;
-		int temp = element[i];
+		int temp = Element[i];
 		for (parent = i; 2 * parent <= size; parent = child)
 		{
 			child = 2 * parent;
-			if ((child != size) && (element[child + 1] < element[child]))
+			if ((child != size) && (Element[child + 1] < Element[child]))
 			{
 				child++;
 			}
-			if (element[child] >= temp)
+			if (Element[child] >= temp)
 			{
 				break;
 			}
 			else
 			{
-				element[parent] = element[child];
+				Element[parent] = Element[child];
 			}
 		}
-		element[parent] = temp;
+		Element[parent] = temp;
 	}
 	void adjust()
 	{
@@ -55,7 +55,7 @@ struct Heap
 	{
 		for (int i = 1; i <= size; i++)
 		{
-			cout << element[i] << ' ';
+			cout << Element[i] << ' ';
 		}
 		cout << endl;
 	}
